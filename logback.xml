@@ -47,7 +47,7 @@
   <appender name="Repair" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${cassandra.logdir}/repair.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-      <fileNamePattern>${cassandra.logdir}/system.log.%i.zip</fileNamePattern>
+      <fileNamePattern>${cassandra.logdir}/repair.log.%i.zip</fileNamePattern>
       <minIndex>1</minIndex>
       <maxIndex>20</maxIndex>
     </rollingPolicy>
@@ -103,26 +103,6 @@
   </appender>
 
 
-    <appender name="MessagingService" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${cassandra.logdir}/messagingService.log</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-      <fileNamePattern>${cassandra.logdir}/system.log.%i.zip</fileNamePattern>
-      <minIndex>1</minIndex>
-      <maxIndex>20</maxIndex>
-    </rollingPolicy>
-
-    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-      <maxFileSize>20MB</maxFileSize>
-    </triggeringPolicy>
-    <encoder>
-      <pattern>%-5level [%thread] %date{ISO8601} %F:%L - %msg%n</pattern>
-      <!-- old-style log format
-      <pattern>%5level [%thread] %date{ISO8601} %F (line %L) %msg%n</pattern>
-      -->
-    </encoder>
-  </appender>
-
-
   <root level="INFO">
     <appender-ref ref="FILE" />
     <appender-ref ref="STDOUT" />
@@ -156,11 +136,11 @@
   </logger>
 
    <logger name="org.apache.cassandra.utils.StatusLogger" level="WARN">
-      <appender-ref ref="statusLogger"/>
+      <appender-ref ref="StatusLogger"/>
   </logger>
 
   <logger name="org.apache.cassandra.net.MessagingService" level="WARN">
-      <appender-ref ref="statusLogger"/>
+      <appender-ref ref="StatusLogger"/>
   </logger>
 
   <logger name="org.apache.cassandra.net.MessagingService" level="INFO">
